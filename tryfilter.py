@@ -10,22 +10,59 @@ from openpyxl import load_workbook
 import os,shutil,sys
 import numpy as np
 
+wb0 = load_workbook("接口.xlsx")
+ws0 = wb0.active
+prob_list, extension_list = [], []
+
 #####################################################
 
-contestant_dir = 'test'
-destination_dir = "all"
-room_name = "all"
-# contestant_dir = input()
-# destination_dir = input()
-# room_name = input()
-name_dir = 'name.xlsx'
-skipped = "考场"
-prob_list = ['number','work']
-extension_list = ['.cpp','.c','.pas']
-save_xlsx_name = "sample.xlsx"
+# contestant_dir = 'test'
+# destination_dir = "all"
+# room_name = "all"
+# # contestant_dir = input()
+# # destination_dir = input()
+# # room_name = input()
+# name_dir = 'name.xlsx'
+# skipped = "考场"
+# prob_list = ['number','work']
+# extension_list = ['.cpp','.c','.pas']
+# save_xlsx_name = "sample.xlsx"
+
+contestant_dir = ws0.cell(row=2, column=2).value 
+if not contestant_dir: contestant_dir = input()
+destination_dir = ws0.cell(row=3, column=2).value 
+if not destination_dir: destination_dir = input()
+room_name = ws0.cell(row=4, column=2).value 
+if not room_name: room_name = input()
+name_dir = ws0.cell(row=5, column=2).value 
+if not name_dir: name_dir = input()
+
+skipped = ws0.cell(row=6, column=2).value 
+if not skipped: skipped = input()
+
+for i in range(2,10):
+    if not ws0.cell(row=7, column=i).value: break 
+    prob_list.append(ws0.cell(row=8, column=i).value)
+ 
+for i in range(2,10):
+    if not ws0.cell(row=8, column=i).value: break 
+    extension_list.append(ws0.cell(row=8, column=i).value)
+
+save_xlsx_name = ws0.cell(row=9, column=2).value 
+if not save_xlsx_name: save_xlsx_name = input()
+
+# contestant_dir是考生文件夹路径,destination_dir是目标文件夹路径
+# room_name是考场名称 name_dir是考生名单名字 skipped 跳过第一行
+# prob_list是题目名字 extension_list是认可后缀
+# save_xlsx_name是保存的位置（格式为xlsx）
 
 # 修改区域
 #####################################################
+
+if contestant_dir and destination_dir and room_name and name_dir and skipped and prob_list and extension_list and save_xlsx_name:
+    print("接口正确")
+else :
+    print("接口有误")
 
 name_list, room_list = [], []
 no_name, no_dir, no_file = [], [], []
