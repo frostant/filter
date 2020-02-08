@@ -32,6 +32,7 @@ contestant_dir = ws0.cell(row=2, column=2).value
 if not contestant_dir: contestant_dir = input()
 destination_dir = ws0.cell(row=3, column=2).value 
 if not destination_dir: destination_dir = input()
+
 room_name = ws0.cell(row=4, column=2).value 
 if not room_name: room_name = input()
 name_dir = ws0.cell(row=5, column=2).value 
@@ -42,7 +43,7 @@ if not skipped: skipped = input()
 
 for i in range(2,10):
     if not ws0.cell(row=7, column=i).value: break 
-    prob_list.append(ws0.cell(row=8, column=i).value)
+    prob_list.append(ws0.cell(row=7, column=i).value)
  
 for i in range(2,10):
     if not ws0.cell(row=8, column=i).value: break 
@@ -73,12 +74,11 @@ ws = wb.active
 wb2 = load_workbook(name_dir)
 namewb = wb2.active
 max_row = namewb.max_row
-print("the number of contestant is %d"%max_row)
+print("the number of contestant is %d"%(max_row-1))
 
-for row in range(1,max_row):
+for row in range(1,max_row+1):
     name_list.append(namewb.cell(row=row,column=1).value)
     room_list.append(namewb.cell(row=row,column=2).value)
-# print(name_list)
 
 ws.cell(row=1,column=1,value="stuID")
 ws.cell(row=1,column=2,value="room")
@@ -98,7 +98,7 @@ for i, con_name in enumerate(name_list):
         ws.cell(row=idx,column=3,value="abs_con")
         idx=idx+1
         continue
-    if destination_dir != '0':
+    if destination_dir != 1:
         dst_path = os.path.join(destination_dir,con_name)
         if not os.path.exists(dst_path):
             os.makedirs(dst_path)
@@ -117,7 +117,7 @@ for i, con_name in enumerate(name_list):
             
             file_found.append(os.path.join(src_path, aim_file))
             
-            if destination_dir != '0':
+            if destination_dir != 1:
                 cpy_path = os.path.join(dst_path, p_name)
                 if not os.path.exists(cpy_path):
                     os.makedirs(cpy_path)
