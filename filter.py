@@ -63,6 +63,7 @@ if contestant_dir and destination_dir and room_name and name_dir and skipped and
     print("接口正确")
 else :
     print("接口有误")
+    sys.exit()
 
 name_list, room_list = [], []
 no_name, no_dir, no_file = [], [], []
