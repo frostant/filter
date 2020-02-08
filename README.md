@@ -26,6 +26,16 @@
 
 
 
+##　使用例子：
+
+我们提供一个例子方便你使用程序
+
+```
+C:\Users\>cd C:\Users\'username'\python
+
+C:\Users\'username'\Desktop\python>py filter.py
+```
+
 
 
 ## 注意事项
